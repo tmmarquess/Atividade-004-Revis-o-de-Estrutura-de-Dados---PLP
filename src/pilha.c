@@ -66,20 +66,51 @@ void print_stack(stack *top)
     printf("\n===========================================\n");
 }
 
+void load_stack_from_txt(stack **top, char filename[])
+{
+    stack *aux = NULL;
+    FILE *file;
+    file = fopen(filename, "r");
+
+    if (file == NULL)
+    {
+        printf("can't open %s", filename);
+        return;
+    }
+
+    int number_size = 0;
+    char *value = malloc(sizeof(char) * (number_size + 1)), current;
+    do
+    {
+        current = fgetc(file);
+        if (current != ' ' && current != EOF)
+        {
+            value[number_size] = current;
+            number_size++;
+            value = realloc(value, sizeof(number_size + 1));
+        }
+        else
+        {
+            enqueue(&aux, atoi(value));
+            free(value);
+            number_size = 0;
+            value = malloc(sizeof(char) * (number_size + 1));
+        }
+
+    } while (current != EOF);
+
+    fclose(file);
+
+    while (stack_size(aux) != 0)
+    {
+        enqueue(top, dequeue(&aux));
+    }
+    
+    print_stack(*(top));
+}
+
 int main()
 {
     stack *new = NULL;
-    print_stack(new);
-    enqueue(&new, 5);
-    print_stack(new);
-    enqueue(&new, 10);
-    print_stack(new);
-    enqueue(&new, -1);
-    print_stack(new);
-    printf("apagado = %d\n", dequeue(&new));
-    print_stack(new);
-    printf("apagado = %d\n", dequeue(&new));
-    print_stack(new);
-    printf("apagado = %d\n", dequeue(&new));
-    print_stack(new);
+    load_stack_from_txt(&new, "arq_teste.txt");
 }
