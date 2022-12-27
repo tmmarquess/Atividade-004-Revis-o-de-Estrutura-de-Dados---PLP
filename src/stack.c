@@ -105,12 +105,4 @@ void load_stack_from_txt(stack **top, char filename[])
     {
         enqueue(top, dequeue(&aux));
     }
-    
-    print_stack(*(top));
-}
-
-int main()
-{
-    stack *new = NULL;
-    load_stack_from_txt(&new, "arq_teste.txt");
 }
