@@ -131,8 +131,8 @@ void print_table(hash_table table)
     }
 }
 
-
-void load_table_from_txt(hash_table table, char filename[]){
+void load_table_from_txt(hash_table table, char filename[])
+{
     FILE *file;
     file = fopen(filename, "r");
 
