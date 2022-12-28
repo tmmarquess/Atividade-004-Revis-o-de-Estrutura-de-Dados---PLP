@@ -5,6 +5,8 @@
 #define true 1
 #define false 0
 
+#define TAMANHO 100
+
 bool is_number(char str[])
 {
     char numbers[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -96,5 +98,9 @@ int calculate(char expression[])
 
 int main()
 {
-    printf("%d", calculate("5 3 2 + * 5 / 6 -"));
+    char expressao[TAMANHO];
+    printf("> Digite a expressao: ");
+    fflush(stdin);
+    scanf("%[^\n]%*c", expressao);
+    printf("Resultado: %d\n", calculate(expressao));
 }
